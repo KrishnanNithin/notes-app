@@ -27,6 +27,17 @@ const removeNote = (title) =>{
     }
 }
 
+const listNotes = () =>{
+    const notes = loadNotes()
+    console.log(chalk.green("Your notes are: "))
+    for(note of notes){
+        console.log(chalk.blue(note.title))
+    }
+    if(notes.length===0){
+        console.log(chalk.red("You have no notes yet!"))
+    }
+}
+
 const loadNotes = () =>{
     try{
         const dataBuffer = fs.readFileSync('notes.json')
@@ -38,7 +49,7 @@ const loadNotes = () =>{
     }
 }
 
-const saveNotes = (notes) =>{
+const saveNotes = notes =>{
     notesJSON = JSON.stringify(notes)
     fs.writeFileSync('notes.json', notesJSON)
 }
@@ -46,4 +57,5 @@ const saveNotes = (notes) =>{
 module.exports = {
     addNote:  addNote,
     removeNote: removeNote,
+    listNotes: listNotes,
 }
